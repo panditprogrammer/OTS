@@ -1,0 +1,93 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: aliceblue !important;
+}
+
+.navbar{
+    background-color: #00007c !important;
+}
+
+.navbar-brand{
+    font-weight: bolder;
+    color: white !important;
+}
+.nav-link{
+    color: white !important;
+}
+
+
+
+.navbar .username{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar .username i{
+    color: #00007c !important;
+    font-size: 1.5rem;
+}
+
+.active{
+    background-color: #00007c !important;
+    color: white !important;
+}
+.btn-primary{
+    background-color: #00007c !important;
+}
+
+.lession{
+    background-color: white;
+}
+
+.lession a{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid lightgray;
+}
+
+.lession a:hover{
+    color: black;
+    background-color: lightgray;
+}
+
+.video{
+    height: 480px;
+    position: relative;
+    
+}
+
+.video iframe{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    border: 1px solid green;
+}
+
+
+/* course section  */
+.card img{
+    max-height: 300px;
+}
+
+
+footer{
+    background-color: #00007c !important;
+}
+
+footer .footer p{
+    color: white;
+}
