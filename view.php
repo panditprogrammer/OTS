@@ -1,61 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once "header.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Teaching System</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-          <!-- font-awesome  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">OTS</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
-                <div class="col-md-4">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="course.html">Courses</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-                <div class="col-md-4">
-                    <div class="login d-flex justify-content-end">
-                        <span class="username ">
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+?>
     <div class="container">
         <div class="row my-4">
             <div class="col-lg-4">
@@ -79,11 +25,7 @@
             </div>
             <div class="col-lg-8">
                 <div class="video">
-                    <iframe height="auto" width="100%" src="https://www.youtube.com/embed/nESEKyUXZds"
-                        title="Transparent Registration Form Using Only Html And Css In Hindi | Signup form in html css  Login Form"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                    <iframe height="auto" width="100%" src="https://www.youtube.com/embed/nESEKyUXZds" title="Transparent Registration Form Using Only Html And Css In Hindi | Signup form in html css  Login Form" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
                 <div class="video-description py-4 border">
@@ -137,14 +79,6 @@
         </div>
     </div>
 
-    <footer class="container-fluid mt-4">
-        <div class="footer d-flex justify-content-center align-items-center p-3">
-            <p class="m-0">&copy; All rights reserved 2022.</p>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+    <?php
+    require_once "footer.php";
+    ?>
