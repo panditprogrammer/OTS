@@ -1,27 +1,28 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     transition: 0.5s;
 }
 
-body{
+body {
     background-color: aliceblue !important;
 }
 
-.navbar{
+.navbar {
     background-color: #00007c !important;
 }
 
-.navbar-brand{
+.navbar-brand {
     font-weight: bolder;
     color: white !important;
 }
-.nav-link{
+
+.nav-link {
     color: white !important;
 }
 
-.navbar .username{
+.navbar .username {
     border-radius: 50%;
     height: 50px;
     width: 50px;
@@ -31,13 +32,14 @@ body{
     align-items: center;
     cursor: pointer;
     position: relative;
-    
-}
-.navbar .username:hover .usermenu{
-    display: block;    
+
 }
 
-.navbar .username .usermenu{
+.navbar .username:hover .usermenu {
+    display: block;
+}
+
+.navbar .username .usermenu {
     width: 240px;
     background-color: aliceblue;
     position: absolute;
@@ -52,7 +54,7 @@ body{
 
 }
 
-.navbar .username .usermenu a{
+.navbar .username .usermenu a {
     display: block;
     text-decoration: none;
     border-bottom: 1px solid #00007c;
@@ -60,48 +62,50 @@ body{
     color: #00007c;
 
 }
-.navbar .username .usermenu a:hover{
+
+.navbar .username .usermenu a:hover {
     color: black;
     background-color: lightgray;
 
 }
 
-.navbar .username i{
+.navbar .username i {
     color: #00007c !important;
     font-size: 1.5rem;
 }
 
-.active{
+.active {
     background-color: #00007c !important;
     color: white !important;
 }
-.btn-primary{
+
+.btn-primary {
     background-color: #00007c !important;
 }
 
-.lession{
+.lession {
     background-color: white;
 }
 
-.lession a{
+.lession a {
     color: black;
     font-weight: bold;
     text-decoration: none;
     border-bottom: 1px solid lightgray;
 }
 
-.lession a:hover{
+.lession a:hover {
     color: black;
     background-color: lightgray;
 }
 
-.video{
+.video {
     height: 480px;
     position: relative;
-    
+
 }
 
-.video iframe{
+.video iframe {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -110,17 +114,15 @@ body{
     border: 1px solid green;
 }
 
-
 /* course section  */
-.card img{
+.card img {
     max-height: 300px;
 }
 
-
-footer{
+footer {
     background-color: #00007c !important;
 }
 
-footer .footer p{
+footer .footer p {
     color: white;
 }

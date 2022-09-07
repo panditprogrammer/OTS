@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Teaching System</title>
 
-
     <link rel="stylesheet" href="style.css">
 
     <!-- bootstrap  -->
@@ -28,13 +27,16 @@
             </button>
 
             <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
-                <div class="col-md-4">
+            <div class="col-md-4">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="course.php">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registration.php">Registration</a>
                         </li>
                     </ul>
                 </div>
