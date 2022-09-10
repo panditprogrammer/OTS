@@ -1,5 +1,7 @@
-<?php require_once "config.php"; ?>
-<script>
-    sessionStorage.removeItem("username");
-    location.assign("<?php echo $root; ?>/index.php");
-</script>
+<?php 
+require_once "config.php";
+
+session_start();
+unset($_SESSION["username"]);
+session_destroy();
+header("location:".$root."/login.php");

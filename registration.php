@@ -38,29 +38,30 @@
                             <form class="user" id="submit_form">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="first_name" placeholder="First Name">
+                                        <input type="text" class="form-control form-control rounded-pill" id="firstname" placeholder="First Name">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="last_name" placeholder="Last Name">
+                                        <input type="text" class="form-control form-control rounded-pill" id="lastname" placeholder="Last Name">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="email" placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="password" placeholder="Password">
+                                        <input type="text" class="form-control form-control rounded-pill" id="username" placeholder="username">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="repeat_password" placeholder="Repeat Password">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select name="userType" id="userType" class="form-select form-control rounded-pill">
+                                            <option value="0" selected>Student</option>
+                                            <option value="1">Teacher</option>
+                                        </select>
                                     </div>
                                 </div>
 
-
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="userType">
-                                        <label class="custom-control-label" for="userType">Register as Teacher</label>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control rounded-pill" id="password" placeholder="Password">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control rounded-pill" id="repeat_password" placeholder="Repeat Password">
                                     </div>
                                 </div>
 
@@ -111,29 +112,21 @@
             $("#register_btn").click(function(e) {
                 e.preventDefault();
 
-                let first_name = $("#first_name").val();
-                let last_name = $("#last_name").val();
-                let email = $("#email").val();
+                let firstname = $("#firstname").val();
+                let lastname = $("#lastname").val();
+                let username = $("#username").val();
                 let password = $("#password").val();
                 let repeat_password = $("#repeat_password").val();
-
-                let userType = $("#userType").is(":checked");
-                if(userType === true) {
-                    userType = "teacher";
-                }else{
-                    userType = "student";
-                }
+                let userType = $("#userType").val();
 
                 let data = {
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
+                    firstname: firstname,
+                    lastname: lastname,
+                    username: username,
                     password: password,
                     repeat_password: repeat_password,
                     userType: userType
                 }
-
-                console.log(userType);
 
                 $.ajax({
                     url: "registration-save.php",
@@ -141,10 +134,10 @@
                     data: data,
                     success: function(response) {
                         if (response === "1") {
-                            $("#message").text("Please Enter Required Fields").addClass("text-danger").show(500);
+                            $("#message").text("Please fill all required Fields").addClass("text-danger").show(500);
                         }
                         if (response === "3") {
-                            $("#message").text("Email Already Exist!").addClass("text-danger").show(500);
+                            $("#message").text("Username already exist!").addClass("text-danger").show(500);
                         }
                         if (response === "2") {
                             $("#message").text("Password Missmatch!").addClass("text-danger").show(500);;

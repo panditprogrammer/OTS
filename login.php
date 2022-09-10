@@ -1,13 +1,18 @@
 <?php
 require_once "config.php";
+
+if (isset($_GET["res"])) {
+    if ($_GET["res"] == "-1")
+        $login_msg = "Username or Password Missmatch!";
+    if ($_GET["res"] == "0")
+        $login_msg = "Please fill the required fields!";
+} else {
+    $login_msg = "";
+}
+
 ?>
 
 
-<script>
-    if (sessionStorage.getItem("username") !== null) {
-        location.assign("<?php echo $root; ?>/index.php");
-    }
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,24 +56,27 @@ require_once "config.php";
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
 
+                                    <div class="text-center text-danger">
+                                        <p><?php echo $login_msg; ?></p>
+                                    </div>
                                     <div id="success_reg_msg" class="text-center text-success">
                                         <p>You have Successfully Registered, Login with your Credentials!</p>
                                     </div>
-                                    <form class="user" id="login_form">
+                                    <form class="user" id="login_form" method="POST" action="student-teacher-login.php">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="login_email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input type="username" class="form-control form-control-user" name="login_username" id="login_username" aria-describedby="usernameHelp" placeholder="Enter username...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="login_password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" name="login_password" id="login_password" placeholder="Password">
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="loginAsTeacher">
-                                                <label class="custom-control-label" for="loginAsTeacher">Login as Teacher
+                                                <input type="checkbox" class="custom-control-input" id="userType" name="userType" value="1">
+                                                <label class="custom-control-label" for="userType">Login as Teacher
                                                 </label>
                                             </div>
-                                        </div>
-                                        <button id="login_submit" class="btn btn-primary btn-user btn-block">
+                                        </div> -->
+                                        <button id="login_submit" class="my-4 btn btn-primary btn-user btn-block" name="login_btn">
                                             Login
                                         </button>
                                         <hr>
@@ -116,53 +124,6 @@ require_once "config.php";
         } else {
             $("#success_reg_msg").hide();
         }
-
-        // login submit 
-        $("#login_submit").click(function(e) {
-            e.preventDefault();
-            let login_email = $("#login_email").val();
-            let login_password = $("#login_password").val();
-            let loginAsTeacher = $("#loginAsTeacher").is(":checked");
-
-            let login_data = {
-                login_email: login_email,
-                login_password: login_password,
-                loginAsTeacher: loginAsTeacher
-            }
-
-            $.ajax({
-                url: "student-teacher-login.php",
-                type: "POST",
-                data: login_data,
-                success: function(response) {
-                    console.log(response);
-                    if (response === "-1") {
-                        $("#success_reg_msg").html("<p>Please fill required fields</p>").show(500).addClass("text-danger");
-                    }
-                    if (response === "0") {
-                        $("#success_reg_msg").html("<p>Email or Password is incorrect!</p>").show(500).addClass("text-danger");;
-                    }
-                    // get the teacher or student username 
-                    let response_arr = response.split("&");
-                    let login_res_code = response_arr[0];
-                    let login_res_user = response_arr[1];
-
-                    if (login_res_code === "1") {
-                        $("#success_reg_msg").html("<p>Logged In As Student!</p>").show(500);
-                        $(location).prop('href', "<?php echo $root; ?>/index.php");
-                        sessionStorage.setItem("username", login_res_user);
-                    }
-                    if (login_res_code === "2") {
-                        $("#success_reg_msg").html("<p> Logged In As Teacher!</p>").show(500);
-                        $(location).prop('href', "<?php echo $root; ?>/admin/index.php?user=" + login_res_user);
-                        sessionStorage.setItem("username", login_res_user);
-                    }
-                }
-            });
-            setTimeout(() => {
-                $("#success_reg_msg").hide(500).removeClass("text-danger");
-            }, 5000);
-        });
     </script>
 
 </body>

@@ -2,20 +2,18 @@
 
 require_once "config.php";
 
-$first_name = $_POST["first_name"];
-$last_name = $_POST["last_name"];
-$email = $_POST["email"];
+$firstname = $_POST["firstname"];
+$lastname = $_POST["lastname"];
+$username = $_POST["username"];
 $password = $_POST["password"];
 $repeat_password = $_POST["repeat_password"];
 $userType = $_POST["userType"];
 
 
-if (empty($first_name) || empty($last_name) || empty($email) || empty($password)) {
+if (empty($firstname) || empty($lastname) || empty($username) || empty($password)) {
     echo "1"; // filed empty found
     return;
 }
-
-
 
 if ($password != $repeat_password) {
     echo "2"; // password missmatch
@@ -25,29 +23,23 @@ if ($password != $repeat_password) {
 }
 
 
-// check student or teacher 
-if ($userType == "teacher") {
-    // as Teacher 
-    $check_email = "SELECT teacher_email FROM teachers WHERE teacher_email = '$email'";
-    $emailExist = $conn->query($check_email);
 
-    if ($emailExist->num_rows > 0) {
-        echo "3"; // email already used
-        return;
-    }
+$check_username = "SELECT * FROM users WHERE username = '$username' AND user_password = '$password'";
+$usernameExist = $conn->query($check_username);
 
-    $sql = "INSERT INTO teachers (teacher_fname, teacher_lname, teacher_email, t_password) VALUES ('$first_name','$last_name','$email','$password')";
-} else {
-    // as Students 
-    $check_email = "SELECT email FROM students WHERE email = '$email'";
-    $emailExist = $conn->query($check_email);
-
-    if ($emailExist->num_rows > 0) {
-        echo "3"; // email already used
-        return;
-    }
-    $sql = "INSERT INTO students (first_name, last_name, email, s_password) VALUES ('$first_name','$last_name','$email','$password')";
+if ($usernameExist->num_rows > 0) {
+    echo "3"; // username already used
+    return;
 }
+
+$check_username = "SELECT username FROM users WHERE username = '$username'";
+$usernameExist = $conn->query($check_username);
+
+if ($usernameExist->num_rows > 0) {
+    echo "3"; // username already used
+    return;
+}
+$sql = "INSERT INTO users (firstname, lastname, username, user_password, user_role) VALUES ('$firstname','$lastname','$username','$password','$userType')";
 
 
 if ($conn->query($sql)) {
