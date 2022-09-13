@@ -21,6 +21,7 @@ if (isset($_POST["login_btn"])) {
             session_start();
             $_SESSION["username"] = $user["firstname"];
             $_SESSION["user_role"] = $user["user_role"];
+            $_SESSION["user_id"] = $user["user_id"];
 
             if ($user["user_role"] == "1") {
                 header("location:" . $root . "/teacher/index.php"); // teacher

@@ -58,7 +58,7 @@
              <div class="bg-white py-2 collapse-inner rounded">
                  <h6 class="collapse-header">Published Courses</h6>
                  <a class="collapse-item" href="courses.php">All Courses</a>
-                 <a class="collapse-item" href="courses.php">Add new Course</a>
+                 <a class="collapse-item" href="add-new-course.php">Add new Course</a>
                  <div class="collapse-divider"></div>
              </div>
          </div>

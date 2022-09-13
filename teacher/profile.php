@@ -5,6 +5,31 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
     header("location:" . $root . "/login.php");
 }
 
+$user_id = $_SESSION["user_id"];
+$message = null;
+if (isset($_POST["save_profile"])) {
+    $user_fname = mysqli_real_escape_string($conn, $_POST["user_fname"]);
+    $user_lname = mysqli_real_escape_string($conn, $_POST["user_lname"]);
+    $user_gender = mysqli_real_escape_string($conn, $_POST["user_gender"]);
+    $user_dob = mysqli_real_escape_string($conn, $_POST["user_dob"]);
+    $user_email = mysqli_real_escape_string($conn, $_POST["user_email"]);
+    $user_phone = mysqli_real_escape_string($conn, $_POST["user_phone"]);
+    $user_address = mysqli_real_escape_string($conn, $_POST["user_address"]);
+
+
+    if (empty(trim($user_fname)) || empty(trim($user_lname)) || empty(trim($user_email))) {
+        $message = '<p class="text-danger">Please fill the require filed</p>';
+    } else {
+        $sql = "UPDATE users SET firstname = '$user_fname', lastname = '$user_lname',gender = '$user_gender', dob = '$user_dob', email = '$user_email',phone = '$user_phone', address = '$user_address' WHERE user_id = '$user_id'";
+
+        if ($conn->query($sql)) {
+            $message = '<p class="text-success">Profile Updated</p>';
+        } else {
+            $message = '<p class="text-danger">Unable to Update</p>';
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +59,7 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-       <?php require_once "sidebar.php"; ?>
+        <?php require_once "sidebar.php"; ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -50,69 +75,138 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Teacher Profile</h1>
 
+                    <div class="container">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="p-3">
+                                    <div class="text-center my-2" id="message"><?php echo $message; ?></div>
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Your Profile Details</h1>
+                                    </div>
+
+                                    <?php
+                                    $sql = "SELECT * FROM users WHERE user_id = '$user_id'";
+                                    $user_result = $conn->query($sql);
+                                    if ($user_result->num_rows > 0) {
+                                        while ($row = $user_result->fetch_assoc()) {
+                                    ?>
+                                            <div class="py-2 m-auto mb-0" style="width: 10rem;">
+                                                <img title="click to change profile picture" height="160px" width="160px" src="<?php echo $root; ?>/teacher/<?php echo $row['profile_img']; ?>" class="card-img-top rounded-circle" style="cursor: pointer;" id="profile_img" alt="user profile">
+                                                <h4 class="py-2 text-center"><?php echo $_SESSION["username"]; ?></h4>
+                                            </div>
+                                            <p class="text-center" id="profile_img_msg"></p>
+                                            <!-- profile image upload  -->
+                                            <div id="profile_wrapper">
+                                                <form enctype="multipart/form-data" id="profile_form" class="form-group row d-flex justify-content-center">
+                                                    <div class="col-md-2 col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="hidden" name="previous_profile" value="<?php echo $row["profile_img"]; ?>">
+                                                        <input type="file" accept="image/*" id="profile_img_field" name="profile_img_field" class="btn-sm m-auto">
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-6 mb-3 mb-sm-0 d-flex justify-content-center">
+                                                        <button type="submit" class="btn-sm btn-primary" id="profile_upload_btn">Upload</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <form class="user my-4" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_fname">First Name</label>
+                                                        <input type="text" class="form-control form-control rounded-pill" name="user_fname" id="user_fname" value="<?php echo $row["firstname"]; ?>" placeholder="First Name">
+                                                    </div>
+
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_lname">Last Name</label>
+                                                        <input type="text" class="form-control form-control rounded-pill" name="user_lname" value="<?php echo $row["lastname"]; ?>" id="user_lname" placeholder="Last Name">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_gender">Select Your Gender</label>
+                                                        <select name="user_gender" id="user_gender" class="form-select form-control rounded-pill">
+                                                            <option disabled selected>Gender</option>
+                                                            <option value="m">male</option>
+                                                            <option value="f">Female</option>
+                                                            <option value="o">Other</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_dob">Date of Birth</label>
+                                                        <input type="date" class="form-control form-control rounded-pill" name="user_dob" value="<?php echo $row["dob"]; ?>" id="user_dob" placeholder="Date Of Birth">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_email">Email Address</label>
+                                                        <input type="email" class="form-control form-control rounded-pill" name="user_email" value="<?php echo $row["email"]; ?>" id="user_email" placeholder="Email Address">
+                                                    </div>
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_phone">Phone Number</label>
+                                                        <input type="tel" class="form-control form-control rounded-pill" name="user_phone" value="<?php echo $row["phone"]; ?>" id="user_phone" placeholder="Mobile Number">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="user_address">Your Address</label>
+                                                        <textarea name="user_address" class="form-control form-control rounded" id="user_address" cols="10" rows="3" placeholder="Address"><?php echo $row["address"]; ?></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <button class="btn btn-primary btn-user btn-inline-block" name="save_profile" id="save_profile">
+                                                    Save Profile
+                                                </button>
+
+                                            </form>
+                                    <?php
+
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; <?php echo $site_name; ?> 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+            <?php require_once "footer.php"; ?>
 
-    </div>
-    <!-- End of Page Wrapper -->
+            <script>
+                $(document).ready(function() {
+                    
+                    //  profile img js  
+                    $("#profile_wrapper").hide();
+                    $("#profile_img").click(function() {
+                        $("#profile_wrapper").toggle(500);
+                    });
+                    
+                    // profile upload 
+                    $("#profile_form").submit(function(e) {
+                        e.preventDefault();
+                        $.ajax({
+                            url: "profile-img-upload.php",
+                            type: "POST",
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            data: new FormData(this),
+                            success: function(response) {
+                                $("#profile_img_msg").text(response);
+                                $("#profile_wrapper").hide();
+                            }
+                        });
+                    });
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?php echo $root; ?>/logout.php">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo $root; ?>/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo $root; ?>/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo $root; ?>/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo $root; ?>/admin/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="<?php echo $root; ?>/admin/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<?php echo $root; ?>/admin/js/demo/chart-area-demo.js"></script>
-    <script src="<?php echo $root; ?>/admin/js/demo/chart-pie-demo.js"></script>
-
-</body>
-
-</html>
+                });
+            </script>
