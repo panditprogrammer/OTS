@@ -22,7 +22,7 @@ if ($file['error'] == 0 && $img_file_name != "") {
         $sql = "UPDATE users SET profile_img = '$final_file' WHERE user_id = '$user_id'";
         if ($conn->query($sql)) {
             echo "Profile picture uploaded!";
-            if ($previous_profile_name != "") {
+            if ($previous_profile_name != "" ) {
                 unlink($previous_profile_path); // delete previous image 
             }
         } else {

@@ -93,7 +93,7 @@ if (isset($_POST["save_profile"])) {
                                         while ($row = $user_result->fetch_assoc()) {
                                     ?>
                                             <div class="py-2 m-auto mb-0" style="width: 10rem;">
-                                                <img title="click to change profile picture" height="160px" width="160px" src="<?php echo $root; ?>/teacher/<?php echo $row['profile_img']; ?>" class="card-img-top rounded-circle" style="cursor: pointer;" id="profile_img" alt="user profile">
+                                                <img title="click to change profile picture" height="160px" width="160px" src="<?php echo $root; ?>/teacher/res/<?php echo $row['profile_img']; ?>" class="card-img-top rounded-circle" style="cursor: pointer;" id="profile_img" alt="user profile">
                                                 <h4 class="py-2 text-center"><?php echo $_SESSION["username"]; ?></h4>
                                             </div>
                                             <p class="text-center" id="profile_img_msg"></p>
@@ -101,8 +101,11 @@ if (isset($_POST["save_profile"])) {
                                             <div id="profile_wrapper">
                                                 <form enctype="multipart/form-data" id="profile_form" class="form-group row d-flex justify-content-center">
                                                     <div class="col-md-2 col-sm-6 mb-3 mb-sm-0">
+
                                                         <input type="hidden" name="previous_profile" value="<?php echo $row["profile_img"]; ?>">
+
                                                         <input type="file" accept="image/*" id="profile_img_field" name="profile_img_field" class="btn-sm m-auto">
+
                                                     </div>
                                                     <div class="col-md-2 col-sm-6 mb-3 mb-sm-0 d-flex justify-content-center">
                                                         <button type="submit" class="btn-sm btn-primary" id="profile_upload_btn">Upload</button>
@@ -127,10 +130,18 @@ if (isset($_POST["save_profile"])) {
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="user_gender">Select Your Gender</label>
                                                         <select name="user_gender" id="user_gender" class="form-select form-control rounded-pill">
-                                                            <option selected>Gender</option>
-                                                            <option value="m">male</option>
-                                                            <option value="f">Female</option>
-                                                            <option value="o">Other</option>
+                                                        <option value="" selected>Select Your Gender</option>
+                                                            <?php
+                                                            $gender = array('m' => 'Male', 'f' => 'Female', 'o' => 'Other');
+                                                            foreach ($gender as $key => $value) {
+                                                                if ($row['gender'] == $key) {
+                                                                    $selected = "selected";
+                                                                } else {
+                                                                    $selected = null;
+                                                                }
+                                                                echo '<option ' . $selected . ' value="' . $key . '">' . $value . '</option>';
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
 
@@ -184,13 +195,13 @@ if (isset($_POST["save_profile"])) {
 
             <script>
                 $(document).ready(function() {
-                    
+
                     //  profile img js  
                     $("#profile_wrapper").hide();
                     $("#profile_img").click(function() {
                         $("#profile_wrapper").toggle(500);
                     });
-                    
+
                     // profile upload 
                     $("#profile_form").submit(function(e) {
                         e.preventDefault();
