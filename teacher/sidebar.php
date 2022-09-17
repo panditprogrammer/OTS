@@ -59,6 +59,7 @@
                  <h6 class="collapse-header">Published Courses</h6>
                  <a class="collapse-item" href="courses.php">All Courses</a>
                  <a class="collapse-item" href="add-new-course.php">Add new Course</a>
+                 <a class="collapse-item" href="add-lession.php">Add new Lession</a>
                  <div class="collapse-divider"></div>
              </div>
          </div>

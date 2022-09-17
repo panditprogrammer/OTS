@@ -48,6 +48,18 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">All Courses</h1>
+                    <?php
+                    $message = null;
+                    if (isset($_GET['d_res']) && $_GET['d_res'] == "1") {
+                        $message = '<p class="text-success">Course Deleted!</p>';
+                    }
+
+                    if (isset($_GET['d_res']) && $_GET['d_res'] == "0") {
+                        $message = '<p class="text-danger">Unable to delete Course!</p>';
+                    }
+                    ?>
+                    <div class="text-center" id="message"> <?php echo $message; ?></div>
+
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.
                     </p>
@@ -55,7 +67,8 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> <h6 class="m-0 font-weight-bold text-primary" ><a href="<?php echo $root."/teacher/add-new-course.php"; ?>">Add new Course</a></h6>
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><a href="<?php echo $root . "/teacher/add-new-course.php"; ?>">Add new Course</a></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -63,29 +76,40 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
                                     <thead>
                                         <tr>
                                             <th>Course Name</th>
-                                            <th>Course Description</th>
-                                            <th>Course Duration</th>
-                                            <th>Course Price</th>
+                                            <th>Category</th>
+                                            <th>Chapters</th>
+                                            <th>Price</th>
+                                            <th>Duration</th>
                                             <th>Start date</th>
-                                            <th>Enrolled Students</th>
+                                            <th class="text-center">Manage</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php
                                         $teacher_id = $_SESSION["user_id"];
-                                        $sql = "SELECT * FROM courses WHERE teacher_id = '$teacher_id'";
+                                        $sql = "SELECT * FROM course_categories LEFT JOIN courses ON courses.c_category = course_categories.cat_id WHERE courses.teacher_id = '$teacher_id'";
                                         $result = $conn->query($sql);
 
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
+
+                                                $course_id =  $row["course_id"];
+
+                                                $sql_less = "SELECT * FROM lessions WHERE fk_course_id = '$course_id'";
+                                                $total_less = $conn->query($sql_less)->num_rows;
+
                                                 echo " <tr>
-                                           <td>".$row["c_name"]."</td>
-                                           <td>".$row["c_desc"]."</td>
-                                           <td>".$row["c_duration"]."</td>
-                                           <td>".$row["c_fees"]."</td>
-                                           <td>".$row["c_start"]."</td>
-                                           <td>0</td>
+                                           <td>" . $row["c_name"] . "</td>
+                                           <td>" . $row["cat_name"] . "</td>
+                                           <td>" . $total_less . "</td>
+                                           <td>" . $row["c_fees"] . "</td>
+                                           <td>" . $row["c_duration"] . "</td>
+                                           <td>" . $row["c_start"] . "</td>
+                                           <td class='d-flex justify-content-between'>
+                                           <a href='$root/teacher/edit-course.php?id=" . $course_id . "' class='btn-sm btn-primary'>Edit</a>
+                                           <a href='$root/teacher/delete-course.php?id=" . $course_id . "' class='btn-sm btn-danger'>Delete</a>                                           
+                                           </td>
                                        </tr>";
                                             }
                                         }

@@ -127,7 +127,7 @@ if (isset($_POST["save_profile"])) {
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="user_gender">Select Your Gender</label>
                                                         <select name="user_gender" id="user_gender" class="form-select form-control rounded-pill">
-                                                            <option disabled selected>Gender</option>
+                                                            <option selected>Gender</option>
                                                             <option value="m">male</option>
                                                             <option value="f">Female</option>
                                                             <option value="o">Other</option>

@@ -92,41 +92,54 @@ if (isset($_POST["save_course"])) {
                                     <div class="text-center my-2" id="message"><?php echo $message; ?></div>
 
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Your Course Details</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Enter Your Course Details</h1>
                                     </div>
 
                                     <form class="user" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label for="c_name">Course Name </label>
                                                 <input type="text" class="form-control form-control rounded-pill" name="c_name" id="c_name" placeholder="Course Name">
                                             </div>
                                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label for="c_category">Course Category</label>
                                                 <select name="c_category" id="c_category" class="form-select form-control rounded-pill">
                                                     <option value="" selected>Category</option>
-                                                    <option value="frontend">Front-End</option>
-                                                    <option value="backend">Back-End</option>
-                                                    <option value="android">Android App</option>
+
+                                                    <?php
+                                                    $sql = "SELECT * FROM course_categories";
+                                                    $result = $conn->query($sql);
+                                                    if ($result->num_rows > 0) {
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo '<option value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
+                                                <label for="c_desc">Course Description</label>
                                                 <textarea class="form-control form-control rounded" name="c_desc" id="c_desc" placeholder="Course Description" rows="3"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label for="c_duration">Course Duration</label>
                                                 <input type="text" class="form-control form-control rounded-pill" name="c_duration" id="c_duration" placeholder="Course Duration">
                                             </div>
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control rounded-pill" name="c_price" id="c_price" placeholder="Course Price">
+                                                <label for="c_price">Course Price (INR)</label>
+                                                <input type="number" min="0" class="form-control form-control rounded-pill" name="c_price" id="c_price" placeholder="Course Price">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label for="c_date">Starting Course Date</label>
                                                 <input type="date" class="form-control form-control rounded-pill" name="c_date" id="c_date" placeholder="Course Start Date">
                                             </div>
                                         </div>
