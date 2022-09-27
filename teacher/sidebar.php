@@ -46,7 +46,7 @@
 
      <!-- Heading -->
      <div class="sidebar-heading">
-        Manage
+         Manage
      </div>
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">

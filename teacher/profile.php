@@ -130,7 +130,7 @@ if (isset($_POST["save_profile"])) {
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="user_gender">Select Your Gender</label>
                                                         <select name="user_gender" id="user_gender" class="form-select form-control rounded-pill">
-                                                        <option value="" selected>Select Your Gender</option>
+                                                            <option value="" selected>Select Your Gender</option>
                                                             <?php
                                                             $gender = array('m' => 'Male', 'f' => 'Female', 'o' => 'Other');
                                                             foreach ($gender as $key => $value) {

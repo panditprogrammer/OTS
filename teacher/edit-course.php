@@ -127,12 +127,12 @@ if (isset($_POST["update_changes"])) {
                                                             $result_cat = $conn->query($sql_cat);
                                                             if ($result_cat->num_rows > 0) {
                                                                 while ($row_cat = $result_cat->fetch_assoc()) {
-                                                                    if($row['c_category'] == $row_cat['cat_id']){
+                                                                    if ($row['c_category'] == $row_cat['cat_id']) {
                                                                         $selected = "selected";
-                                                                    }else{
+                                                                    } else {
                                                                         $selected = null;
                                                                     }
-                                                                    echo '<option '.$selected.' value="' . $row_cat['cat_id'] . '">' . $row_cat['cat_name'] . '</option>';
+                                                                    echo '<option ' . $selected . ' value="' . $row_cat['cat_id'] . '">' . $row_cat['cat_name'] . '</option>';
                                                                 }
                                                             }
                                                             ?>

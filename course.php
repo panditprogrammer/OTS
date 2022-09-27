@@ -2,72 +2,46 @@
 require_once "header.php";
 
 ?>
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-2 g-4 my-4">
-        <div class="col">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2020/05/07/12/11/web-development-company-5141298_1280.jpg" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Python for Advance</h5>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus nihil ullam nulla ipsum
-                        quisquam aliquam possimus amet ratione debitis. Ipsum placeat possimus tenetur consequatur
-                        minima tempora recusandae accusantium, facere eligendi?
-                    </p>
-                    <a href="view.php" class="btn btn-primary">View Course</a>
-                    <a href="#" class="btn btn-primary">Enroll for free</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2020/05/07/12/11/web-development-company-5141298_1280.jpg" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Core Java</h5>
-                    <p class="card-text">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, aspernatur! Laboriosam vero
-                        ducimus amet eius officia nisi adipisci atque natus veniam quo explicabo, optio sed? Placeat
-                        sint non est ut.
-                    </p>
-                    <a href="view.php" class="btn btn-primary">View Course</a>
-                    <a href="#" class="btn btn-primary">Enroll for free</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2020/05/07/12/11/web-development-company-5141298_1280.jpg" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">PHP for Backend</h5>
-                    <p class="card-text">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum voluptates maiores magni,
-                        doloribus mollitia sapiente laborum, necessitatibus reiciendis aliquam quo vero inventore
-                        dignissimos, sit non ipsa nihil autem quasi repudiandae?
-                    </p>
-                    <a href="view.php" class="btn btn-primary">View Course</a>
-                    <a href="#" class="btn btn-primary">Enroll for free</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2020/05/07/12/11/web-development-company-5141298_1280.jpg" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Node JS (MERN)</h5>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur consequuntur
-                        repellendus impedit perspiciatis mollitia recusandae minus temporibus eligendi! Saepe
-                        inventore tenetur atque, nihil deserunt recusandae numquam architecto eius rerum dolores.
-                    </p>
-                    <a href="view.php" class="btn btn-primary">View Course</a>
-                    <a href="#" class="btn btn-primary">Enroll for free</a>
 
+<div class="container">
+    <h1 class="h3 mt-4 text-gray-800">Latest Courses</h1>
+    <hr class="hr">
+
+    <div class="row row-cols-1 row-cols-md-2 g-4 my-4 d-flex justify-content-start">
+        <?php
+        $sql = "SELECT * FROM course_categories RIGHT JOIN courses ON courses.c_category = course_categories.cat_id";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+        ?>
+                <!-- Card -->
+                <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                    <div class="card-body">
+                        <img height="160px" src="https://cdn.pixabay.com/photo/2020/05/07/12/11/web-development-company-5141298_1280.jpg" class="card-img-top" alt="...">
+                        <div class="row no-gutters align-items-center">
+
+                            <div class="col mr-2">
+                                <h4 class="card-title my-2 text-gray-800"><?php echo $row["c_name"]; ?></h4>
+                                <p class="card-text"><?php echo substr($row['c_desc'],0,100); ?></p>
+<div class="d-flex justify-content-end text-secondary"><em> Instructor: Akash Sir</em> </div>
+                                <h6 class="text-xs mb-1"><?php echo $row["cat_name"]; ?></h6>
+                                <div class="d-flex justify-content-between">
+                                    <h5 class=" text-primary mt-1 text-uppercase"> ₹ <?php echo $row['c_fees']; ?></h5>
+                                    <a href="view-course.php?id=<?php echo $row['course_id']; ?>" class="btn btn-primary">Enroll Course</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <!-- /Card -->
+        <?php
+            }
+        }
+        ?>
     </div>
 </div>
-
 
 <?php
 require_once "footer.php";

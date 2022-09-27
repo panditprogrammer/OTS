@@ -1,3 +1,8 @@
+<?php
+require_once "config.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Teaching System</title>
+    <title><?php echo $site_name; ?> - FREE Online Courses (LMS in PHP & MySQL) </title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -22,12 +27,12 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">OTS</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" id="main_menu_toggler" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
-            <div class="col-md-4">
+                <div class="col-md-4">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" href="index.php">Home</a>
@@ -47,13 +52,29 @@
                     </form>
                 </div>
                 <div class="col-md-4">
-                    <div class="login d-flex justify-content-end">
-                        <span class="username ">
+                    <div class="d-flex justify-content-end">
+                        <span class="username" id="user_top_icon">
                             <i class="fa-solid fa-user"></i>
-                            <div class="usermenu">
-                                <a href="#">Dashboard</a>
-                                <a href="#">courses</a>
-                                <a href="logout.php">Logout</a>
+                            <div class="list-group list-group-flush usermenu shadow" id="user_top_menu">
+                                <?php
+                                session_start();
+
+                                if (isset($_SESSION['user_role'])  ||  isset($_SESSION['user_id'])) {
+                                    if ($_SESSION['user_role'] == '1') {
+                                        echo '<a class="list-group-item py-3" href="' . $root . '/teacher">Dashboard</a>';
+                                    }
+                                    if ($_SESSION['user_role'] == '0') {
+                                        echo '<a class="list-group-item py-3" href="' . $root . '/student">Dashboard</a>';
+                                        echo '<a class="list-group-item py-3" href="' . $root . '/student/courses.php">Learning</a>';
+                                    }
+
+                                    echo '<a class="list-group-item py-3" href="logout.php">Logout</a>';
+
+                                } else {
+                                    echo '<a class="list-group-item py-3" href="' . $root . '/login.php">Log In</a>';
+
+                                }
+                                ?>
                             </div>
                         </span>
                     </div>

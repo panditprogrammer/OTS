@@ -34,7 +34,7 @@ if ($_SESSION["user_role"] != "0" || $_SESSION["username"] == null) {
     <div id="wrapper">
 
         <!-- Sidebar -->
-       <?php require_once "sidebar.php"; ?>
+        <?php require_once "sidebar.php"; ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -50,10 +50,190 @@ if ($_SESSION["user_role"] != "0" || $_SESSION["username"] == null) {
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Your Courses</h1>
 
+                    <!-- Content Row -->
+                    <div class="row d-flex justify-content-center">
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+
+                    </div>
+                    <!-- Content Row -->
+
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Recommended Courses</h1>
+                    <!-- Content Row -->
+                    <div class="row d-flex justify-content-center">
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+
+                        <!-- Card -->
+                        <div class="card border-left-primary shadow py-2 mx-2 mb-4" style="width: 25rem;">
+                            <div class="card-body">
+                                <img height="160px" src="<?php echo $root; ?>/admin/img/undraw_profile.svg" class="card-img-top" alt="...">
+                                <div class="row no-gutters align-items-center">
+
+                                    <div class="col mr-2">
+                                        <h5 class="card-title h5 mb-0 font-weight-bold text-gray-800">Web Design</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
+
+                                        <p class="text-xs font-weight-bold mb-1">Frontend Development</p>
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="font-weight-bold text-primary mt-1 text-uppercase">1299.00 (45% OFF)</div>
+                                                <button class="btn-sm btn-primary px-4">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Card -->
+                    </div>
+                    <!-- Content Row -->
+
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
-            
+
             <?php require_once "footer.php"; ?>

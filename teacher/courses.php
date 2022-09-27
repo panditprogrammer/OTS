@@ -107,8 +107,9 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
                                            <td>" . $row["c_duration"] . "</td>
                                            <td>" . $row["c_start"] . "</td>
                                            <td class='d-flex justify-content-between'>
-                                           <a href='$root/teacher/edit-course.php?id=" . $course_id . "' class='btn-sm btn-primary'>Edit</a>
-                                           <a href='$root/teacher/delete-course.php?id=" . $course_id . "' class='btn-sm btn-danger'>Delete</a>                                           
+                                           <a href='$root/teacher/view-course.php?id=" . $course_id . "' class='btn-sm text-primary' title='view'><i class='fas fa-eye'></i></a>
+                                           <a href='$root/teacher/edit-course.php?id=" . $course_id . "' class='btn-sm text-secondary' title='Update'><i class='far fa-edit'></i></a>
+                                           <a href='$root/teacher/delete-course.php?id=" . $course_id . "' class='btn-sm text-danger' title='Delete'><i class='fas fa-trash'></i></a>                                           
                                            </td>
                                        </tr>";
                                             }

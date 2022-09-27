@@ -5,7 +5,15 @@ if ($_SESSION["user_role"] != "1" || $_SESSION["username"] == null) {
     header("location:" . $root . "/login.php");
 }
 
+$old_c_name = null;
+$old_c_categroy = null;
+$old_c_desc = null;
+$old_c_duration = null;
+$old_c_date = null;
+$old_c_price = null;
+
 $message = null;
+$last_insert_id = null;
 // save course details 
 if (isset($_POST["save_course"])) {
 
@@ -20,16 +28,31 @@ if (isset($_POST["save_course"])) {
 
     if (empty(trim($c_name)) || empty(trim($c_categroy)) || empty(trim($c_desc)) || empty(trim($c_duration)) || empty(trim($c_price))) {
         $message = '<p class="text-danger">Please fill the required fields!</p>';
+
+        $old_c_name = $c_name;
+        $old_c_categroy = $c_categroy;
+        $old_c_desc = $c_desc;
+        $old_c_duration = $c_duration;
+        $old_c_date = $c_date;
+        $old_c_price = $c_price;
     } else {
 
         $sql = "INSERT INTO courses (teacher_id,c_name,c_desc,c_category,c_duration,c_fees,c_start) VALUES ('$teacher_id','$c_name','$c_desc','$c_categroy','$c_duration','$c_price','$c_date')";
 
         if ($conn->query($sql)) {
             $message = '<p class="text-success">Saved successfully!</p>';
-            // preventing resubmision form 
+            $last_insert_id =  $conn->insert_id;
+            // preventing resubmission form 
             unset($c_name, $c_categroy, $c_desc, $c_duration, $c_date, $c_price);
+            header("location:" . $root . "/teacher/course-thumb-upload.php?id=" . $last_insert_id);
         } else {
             $message = '<p class="text-danger">Unable to save Course!</p>';
+            $old_c_name = $c_name;
+            $old_c_categroy = $c_categroy;
+            $old_c_desc = $c_desc;
+            $old_c_duration = $c_duration;
+            $old_c_date = $c_date;
+            $old_c_price = $c_price;
         }
     }
 }
@@ -99,7 +122,7 @@ if (isset($_POST["save_course"])) {
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="c_name">Course Name </label>
-                                                <input type="text" class="form-control form-control rounded-pill" name="c_name" id="c_name" placeholder="Course Name">
+                                                <input type="text" class="form-control form-control rounded-pill" name="c_name" id="c_name" value="<?php echo $old_c_name; ?>" placeholder="Course Name">
                                             </div>
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="c_category">Course Category</label>
@@ -111,7 +134,12 @@ if (isset($_POST["save_course"])) {
                                                     $result = $conn->query($sql);
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
-                                                            echo '<option value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
+                                                            if ($old_c_categroy == $row['cat_id']) {
+                                                                $selected = "selected";
+                                                            } else {
+                                                                $selected = null;
+                                                            }
+                                                            echo '<option ' . $selected . ' value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
                                                         }
                                                     }
                                                     ?>
@@ -122,34 +150,34 @@ if (isset($_POST["save_course"])) {
                                         <div class="form-group row">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                 <label for="c_desc">Course Description</label>
-                                                <textarea class="form-control form-control rounded" name="c_desc" id="c_desc" placeholder="Course Description" rows="3"></textarea>
+                                                <textarea class="form-control form-control rounded" name="c_desc" id="c_desc" placeholder="Course Description" rows="3"><?php echo $old_c_desc; ?></textarea>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="c_duration">Course Duration</label>
-                                                <input type="text" class="form-control form-control rounded-pill" name="c_duration" id="c_duration" placeholder="Course Duration">
-                                            </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <label for="c_price">Course Price (INR)</label>
-                                                <input type="number" min="0" class="form-control form-control rounded-pill" name="c_price" id="c_price" placeholder="Course Price">
+                                                <input type="text" class="form-control form-control rounded-pill" name="c_duration" id="c_duration" value="<?php echo $old_c_duration; ?>" placeholder="Course Duration">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label for="c_price">Course Price (INR)</label>
+                                                <input type="number" min="0" class="form-control form-control rounded-pill" name="c_price" id="c_price" value="<?php echo $old_c_price; ?>" placeholder="Course Price">
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="c_date">Starting Course Date</label>
-                                                <input type="date" class="form-control form-control rounded-pill" name="c_date" id="c_date" placeholder="Course Start Date">
+                                                <input type="date" class="form-control form-control rounded-pill" name="c_date" id="c_date" value="<?php echo $old_c_date; ?>" placeholder="Course Start Date">
                                             </div>
                                         </div>
 
-                                        <button class="btn btn-primary btn-user btn-inline-block" name="save_course" id="save_course">
+                                        <button class="btn btn-primary btn-user btn-inline-block" name="save_course" id="save_course" type="submit">
                                             Save Course
                                         </button>
 
                                     </form>
-
+                                    <hr class="hr">
                                 </div>
                             </div>
                         </div>
@@ -161,63 +189,4 @@ if (isset($_POST["save_course"])) {
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; <?php echo $site_name; ?> 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?php echo $root; ?>/logout.php">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo $root; ?>/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo $root; ?>/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo $root; ?>/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo $root; ?>/admin/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="<?php echo $root; ?>/admin/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<?php echo $root; ?>/admin/js/demo/chart-area-demo.js"></script>
-    <script src="<?php echo $root; ?>/admin/js/demo/chart-pie-demo.js"></script>
-
-</body>
-
-</html>
+            <?php require_once "footer.php"; ?>

@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    background-color: #00007c !important;
+    background-color: #0055d1 !important;
 }
 
 .navbar-brand {
@@ -19,6 +19,14 @@ body {
 }
 
 .nav-link {
+    color: white !important;
+}
+
+#main_menu_toggler {
+    background-color: white !important;
+}
+
+#main_menu_toggler .navbar-toggler-icon {
     color: white !important;
 }
 
@@ -35,52 +43,46 @@ body {
 
 }
 
-.navbar .username:hover .usermenu {
-    display: block;
-}
-
+/* user top menu  */
 .navbar .username .usermenu {
     width: 240px;
     background-color: aliceblue;
     position: absolute;
-    top: 3rem;
+    top: 4rem;
     right: 0rem;
     cursor: pointer;
     z-index: 9;
     border-radius: 0.3rem;
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 30%);
     overflow: hidden;
-    display: none;
 
 }
 
-.navbar .username .usermenu a {
+/* .navbar .username .usermenu a {
     display: block;
     text-decoration: none;
-    border-bottom: 1px solid #00007c;
     padding: 1rem;
-    color: #00007c;
+    color: #0055d1;
 
-}
+} */
 
 .navbar .username .usermenu a:hover {
-    color: black;
-    background-color: lightgray;
-
+    color: #0055d1;
+    background-color: white;
 }
 
 .navbar .username i {
-    color: #00007c !important;
+    color: #0055d1 !important;
     font-size: 1.5rem;
 }
 
 .active {
-    background-color: #00007c !important;
+    background-color: #0055d1 !important;
     color: white !important;
 }
 
 .btn-primary {
-    background-color: #00007c !important;
+    background-color: #0055d1 !important;
 }
 
 .lession {
@@ -120,7 +122,7 @@ body {
 }
 
 footer {
-    background-color: #00007c !important;
+    background-color: #0055d1 !important;
 }
 
 footer .footer p {
