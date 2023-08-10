@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+$msgPrint = array();
 $file = $_FILES['lsn_vid'];
 $video_file_name = $file['name'];
 $video_file_type = $file['type'];
@@ -14,10 +15,14 @@ if ($file['error'] == 0 && $video_file_name != "" && $video_file_type == "video/
     $final_file_destination = "videos-lessions/" . $final_file;
 
     if (move_uploaded_file($source_file, $final_file_destination)) {
-        echo "1&".$final_file;
+        array_push($msgPrint, "1&" . $final_file);
     } else {
-        echo "Unable to upload!";
+        array_push($msgPrint, "Unable to upload!");
     }
 } else {
-    echo "Invalid file type!";
+    array_push($msgPrint, "Invalid file type!");
+}
+
+foreach ($msgPrint as $msg) {
+    echo $msg;
 }
